@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/promote/promote",
+    "pages/forward/forward",
+    "pages/lottery/lottery",
+    "pages/my/my",
+    "pages/register/register",
+    "pages/reveal/reveal",
+    "pages/shop/shop",
+    "pages/login/login",
+    "pages/activity/activity"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#F74239",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#cccccc",
+    "selectedColor": "#F74239",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/promote/promote",
+        "iconPath": "static/tab_1.png",
+        "selectedIconPath": "static/tab_1_s.png",
+        "text": "推广"
+      },
+      {
+        "pagePath": "pages/forward/forward",
+        "text": "转发",
+        "iconPath": "static/tab_2.png",
+        "selectedIconPath": "static/tab_2_s.png"
+      },
+      {
+        "pagePath": "pages/lottery/lottery",
+        "text": "抽奖",
+        "iconPath": "static/tab_3.png",
+        "selectedIconPath": "static/tab_3_s.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "static/tab_4.png",
+        "selectedIconPath": "static/tab_4_s.png"
+      }
+    ]
+  },
+  "uswx6281ffb64a0a0cd6ingComponents": true,
+  "usingComponents": {}
+}

@@ -1,0 +1,1 @@
+<view class="_div data-v-05f7e878"><block wx:for="{{5}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view data-event-opts="{{[['tap',[['toReveal']]]]}}" class="item _div data-v-05f7e878" bindtap="__e"><view class="_div data-v-05f7e878">活动名称</view><image class="right data-v-05f7e878" src="/static/right.png" mode="aspectFill"></image></view></block></view>

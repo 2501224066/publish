@@ -1,0 +1,105 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/promote/promote",
+			"style": {
+				"navigationBarTitleText": "推广",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/forward/forward",
+			"style": {
+				"navigationBarTitleText": "转发朋友圈",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/lottery/lottery",
+			"style": {
+				"navigationBarTitleText": "参与抽奖",
+				"enablePullDownRefresh": false
+
+			}
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationBarBackgroundColor": "transparent",
+				"enablePullDownRefresh": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/reveal/reveal",
+			"style": {
+				"navigationBarTitleText": "活动信息",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/shop/shop",
+			"style": {
+				"navigationBarTitleText": "店铺信息",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/activity/activity",
+			"style": {
+				"navigationBarTitleText": "活动",
+				"enablePullDownRefresh": false
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarBackgroundColor": "#F74239",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#cccccc",
+		"selectedColor": "#F74239",
+		"borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/promote/promote",
+			"iconPath": "static/tab_1.png",
+			"selectedIconPath": "static/tab_1_s.png",
+			"text": "推广"
+		}, {
+			"pagePath": "pages/forward/forward",
+			"text": "转发",
+			"iconPath": "static/tab_2.png",
+			"selectedIconPath": "static/tab_2_s.png"
+		}, {
+			"pagePath": "pages/lottery/lottery",
+			"text": "抽奖",
+			"iconPath": "static/tab_3.png",
+			"selectedIconPath": "static/tab_3_s.png"
+		}, {
+			"pagePath": "pages/my/my",
+			"text": "我的",
+			"iconPath": "static/tab_4.png",
+			"selectedIconPath": "static/tab_4_s.png"
+		}]
+	}
+}

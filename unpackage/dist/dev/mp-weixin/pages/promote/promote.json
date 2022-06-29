@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "推广",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "preview": "/pages/promote/components/preview"
+  }
+}
