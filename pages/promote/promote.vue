@@ -1,30 +1,47 @@
 <template>
 	<div>
-		<div class="box shadow">
-			<div class="tab">
-				<div :class="{'tab-item': true, 'tab-item-s' :tempIndex == index }" v-for="(item, index) in tempList"
-					:key="index" @click="handerChekcout(index)">模版{{index+1}}</div>
+		<div class="content">
+			<div class="box shadow">
+				<div class="tab">
+					<div :class="{'tab-item': true, 'tab-item-s' :tempIndex == index }"
+						v-for="(item, index) in tempList" :key="index" @click="handerChekcout(index)">模版{{index+1}}
+					</div>
+				</div>
 			</div>
-		</div>
 
-		<div class="form">
-			<div class="form-item" v-for="(item, index) in tempList[tempIndex].variableList" :key="index">
-				<div class="form-item-label">{{item.varName}}：</div>
-				<div class="form-item-content">
-					<input v-if="item.varType == 'string'" type="text" placeholder="请输入" placeholder-class="placeholder"
-						v-model="item.value" />
+			<div class="form">
+				<div class="form-item" v-for="(item, index) in tempList[tempIndex].variableList" :key="index">
+					<div class="form-item-label">{{item.varName}}：</div>
+					<div class="form-item-content">
+						<input v-if="item.varType == 'string'" type="text" placeholder="请输入"
+							placeholder-class="placeholder" v-model="item.value" />
 
-					<input v-if="item.varType == 'num'" type="number" placeholder="请输入" placeholder-class="placeholder"
-						v-model="item.value" />
+						<input v-if="item.varType == 'num'" type="number" placeholder="请输入"
+							placeholder-class="placeholder" v-model="item.value" />
 
-					<div v-if="item.varType == 'image'" @click="handleUploadImg(index)">
-						<image v-if="item.value" :src="item.value" class="photo" mode="aspectFill"></image>
-						<div v-else class="photo">
-							<image src="/static/upload_photo.png" mode="aspectFill"></image>
-							<text>上传二维码图片</text>
+						<div v-if="item.varType == 'image'" @click="handleUploadImg(index)">
+							<image v-if="item.value" :src="item.value" class="photo" mode="aspectFill"></image>
+							<div v-else class="photo">
+								<image src="/static/upload_photo.png" mode="aspectFill"></image>
+								<text>上传二维码图片</text>
+							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+
+			<div class="come">
+				<span @click="getTemp()">重置表单</span>
+			</div>
+		</div>
+
+		<div v-if="tempList[tempIndex].ykTheme != null" class="link">
+			<div class="link-url">
+				<div><span class="link-url-tag">推广链接</span></div>
+				<div @click="dump(tempList[tempIndex].ykTheme.themeUrl)">{{tempList[tempIndex].ykTheme.themeUrl}}</div>
+			</div>
+			<div class="link-copy" @click="copy(tempList[tempIndex].ykTheme.themeUrl)">
+				复制
 			</div>
 		</div>
 
@@ -37,7 +54,8 @@
 						预览
 					</div>
 				</Preview>
-				<div class="btn btn2" @click="submit()">提交</div>
+				<div v-if="tempList[tempIndex].ykTheme == null" class="btn btn2" @click="submit()">提交</div>
+				<div v-else class="btn btn2" @click="submit()">更新</div>
 			</div>
 		</div>
 	</div>
@@ -59,12 +77,16 @@
 				tempList: [{
 					variableList: null
 				}],
-				tempIndex: 0
+				tempIndex: 0,
+				theme: null,
+				isUpdate: true
 			}
 		},
 		onShow() {
 			if (!this.loginVerify()) return
-			this.getTemp()
+			if (this.isUpdate) {
+				this.getTemp()
+			}
 		},
 		methods: {
 			// 登陆校验
@@ -84,6 +106,28 @@
 				return true
 			},
 
+			// 跳转
+			dump(url) {
+				// #ifdef H5 || MP-WEIXIN  
+				window.location.href = url
+				// #endif
+
+				// #ifdef APP-PLUS　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+				if (plus.os.name == 'Android') {
+					plus.runtime.openURL(url);
+				} else if (plus.os.name == 'iOS') {
+					plus.runtime.openURL(url);
+				}
+				// #endif
+			},
+
+			// 复制
+			copy(url) {
+				uni.setClipboardData({
+					data: url
+				})
+			},
+
 			// 获取模版
 			async getTemp() {
 				let res = await temp({
@@ -91,6 +135,7 @@
 				})
 				this.tempList = res.data.templateList
 				uni.setStorageSync('activityId', res.data.id)
+				this.isUpdate = false
 			},
 
 			// 选择模版
@@ -105,7 +150,7 @@
 					success(res) {
 						const tempFilePaths = res.tempFilePaths
 						wx.uploadFile({
-							url: '/picture/upload',
+							url: 'https://share.youkelb.com/whk/picture/upload',
 							filePath: tempFilePaths[0],
 							name: 'file',
 							formData: {
@@ -140,24 +185,54 @@
 			// 提交
 			async submit() {
 				if (!this.verify()) return
-				let data = {
-					...this.tempList[this.tempIndex],
-					activityId: 1,
-					shopId: 1
+				this.theme = this.tempList[this.tempIndex].ykTheme
+
+				if (this.theme == null) {
+					let data = {
+						templateId: this.tempList[this.tempIndex].id,
+						activityId: uni.getStorageSync('activityId'),
+						shopId: uni.getStorageSync('userInfo').id,
+						ykVariableList: this.tempList[this.tempIndex].variableList
+					}
+					await addActivity(data)
+					uni.showToast({
+						icon: 'none',
+						title: '提交完成'
+					})
+				} else {
+					let data = {
+						id: this.theme.id,
+						templateId: this.tempList[this.tempIndex].id,
+						activityId: uni.getStorageSync('activityId'),
+						shopId: uni.getStorageSync('userInfo').id,
+						ykVariableList: this.tempList[this.tempIndex].variableList
+					}
+					await addActivity(data)
+					uni.showToast({
+						icon: 'none',
+						title: '更新完成'
+					})
 				}
-				await addActivity(data)
-				uni.showToast({
-					icon: 'none',
-					title: '提交完成'
-				})
+				this.getTemp()
 			}
 		}
 	}
 </script>
 
+<style lang="scss">
+	page {
+		background: #F5F5F5;
+	}
+</style>
+
 <style lang="scss" scoped>
 	.shadow {
 		box-shadow: 0px 4px 10px 0px rgba(255, 135, 28, 0.1);
+	}
+
+	.content {
+		background: #fff;
+		border-radius: 0 0 16px 16px;
 	}
 
 	.tab {
@@ -238,6 +313,38 @@
 		margin-bottom: 10rpx;
 	}
 
+	.link {
+		display: flex;
+		align-items: center;
+		padding: 0 30px;
+		margin-top: 50px;
+		box-sizing: border-box;
+		justify-content: space-between;
+
+		&-url {
+			width: 85%;
+			padding: 10px;
+			box-sizing: border-box;
+			border-radius: 10px;
+			color: #fff;
+			background: #F74239;
+			word-break: break-all;
+
+			&-tag {
+				display: inline-block;
+				background: #fff;
+				color: #F74239;
+				padding: 2px 5px;
+				border-radius: 4px;
+				margin-bottom: 6px;
+			}
+		}
+
+		&-copy {
+			color: #F74239;
+		}
+	}
+
 	.sub {
 		display: flex;
 		align-items: center;
@@ -246,5 +353,11 @@
 
 	.btn {
 		width: 330rpx;
+	}
+
+	.come {
+		padding: 50px 0;
+		text-align: center;
+		color: #F74239;
 	}
 </style>

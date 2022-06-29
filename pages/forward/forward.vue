@@ -73,12 +73,14 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	page {
 		background: #F5F5F5;
 		padding-bottom: 40rpx;
 	}
+</style>
 
+<style lang="scss" scoped>
 	.card {
 		background: #FFFFFF;
 		border-radius: 24rpx;
