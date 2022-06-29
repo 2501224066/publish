@@ -13,7 +13,7 @@
 				<div class="form-item-label">手机号：</div>
 				<div class="form-item-content">
 					<input type="text" placeholder="请输入手机号" v-model="form.phone" maxlength="11"
-						placeholder-class="placeholder" />
+						placeholder-class="placeholder" disabled="true" />
 				</div>
 			</div>
 
@@ -28,11 +28,19 @@
 			<div class="form-item">
 				<div class="form-item-label">地址：</div>
 				<div class="form-item-content">
-					<input type="text" placeholder="请输入地址" v-model="form.address" maxlength="100"
+					<input type="text" placeholder="请输入地址" v-model="form.region" maxlength="100"
 						placeholder-class="placeholder" />
 					<span @click="openPicker()">
 						<image class="address-icon" src="/static/address.png" mode="aspectFill"></image>
 					</span>
+				</div>
+			</div>
+
+			<div class="form-item">
+				<div class="form-item-label">详细地址：</div>
+				<div class="form-item-content">
+					<input type="text" placeholder="请输入地址" v-model="form.address" maxlength="100"
+						placeholder-class="placeholder" />
 				</div>
 			</div>
 		</div>
@@ -67,6 +75,7 @@
 					nickname: null,
 					phone: null,
 					storeName: null,
+					region: null,
 					address: null,
 				},
 				lotusAddressData: {
@@ -96,7 +105,7 @@
 					this.lotusAddressData.provinceName = res.province; //省
 					this.lotusAddressData.cityName = res.city; //市
 					this.lotusAddressData.townName = res.town; //区
-					this.form.address = `${res.province}-${res.city}-${res.town} `; //region为已选的省市区的值
+					this.form.region = `${res.province}-${res.city}-${res.town} `; //region为已选的省市区的值
 				}
 			},
 
@@ -107,7 +116,8 @@
 				this.form.nickname = res.data.nickname
 				this.form.phone = res.data.phoneNumber
 				this.form.storeName = res.data.storeName
-				this.form.address = res.data.address
+				this.form.region = res.data.address.split('&')[0]
+				this.form.address = res.data.address.split('&')[1]
 			},
 
 			// 校验
@@ -116,7 +126,8 @@
 					if (!this.form.nickname) throw '请输入联系人'
 					if (!this.form.phone) throw '请输入手机号'
 					if (!this.form.storeName) throw '请输入店铺名'
-					if (!this.form.address) throw '请输入地址'
+					if (!this.form.region) throw '请输入地址'
+					if (!this.form.address) throw '请输入详细地址'
 				} catch (e) {
 					uni.showToast({
 						icon: 'none',
@@ -133,7 +144,7 @@
 				await shopUpdate({
 					id: uni.getStorageSync('userInfo').id,
 					nickname: this.form.nickname,
-					address: this.form.address,
+					address: `${this.form.region}&${this.form.address}`,
 					phoneNumber: this.form.phone,
 					storeName: this.form.storeName,
 				})
