@@ -24,10 +24,13 @@
 
 	.flex-footer {
 		position: fixed;
-		bottom: 120rpx;
+		bottom: 0;
+		/* #ifdef H5 */
+		bottom: 100rpx;
+		/* #endif */
 		left: 0;
 		width: 100%;
-		height: 88rpx;
+		height: 120rpx;
 	}
 
 	.flex-footer-box {

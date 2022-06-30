@@ -317,7 +317,7 @@
 		display: flex;
 		align-items: center;
 		padding: 0 30px;
-		margin-top: 50px;
+		margin: 50px 0;
 		box-sizing: border-box;
 		justify-content: space-between;
 
