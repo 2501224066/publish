@@ -2,7 +2,7 @@ const domain = 'https://share.youkelb.com/whk'
 
 const send = (method, url, data, params = "") => {
 	uni.showLoading({
-		title: '加载中',
+		title: '请求中',
 		duration: 2000,
 		mask: true
 	})
