@@ -22,7 +22,7 @@ const send = (method, url, data, params = "") => {
 					resolve(res.data)
 				} else if (res.data.code === 203) {
 					uni.showToast({
-						icon: 'none',
+						icon: 'error',
 						title: '登录已过期'
 					})
 					setTimeout(() => {
@@ -32,7 +32,7 @@ const send = (method, url, data, params = "") => {
 					}, 1000)
 				} else {
 					uni.showToast({
-						icon: 'none',
+						icon: 'error',
 						title: res.data.msg
 					})
 				}
@@ -40,7 +40,7 @@ const send = (method, url, data, params = "") => {
 			fail: (e) => {
 				uni.hideLoading()
 				uni.showToast({
-					icon: 'none',
+					icon: 'error',
 					title: '网络请求超时，请退出重试',
 					duration: 4000,
 				})

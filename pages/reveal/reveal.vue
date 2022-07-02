@@ -62,7 +62,7 @@
 			async sub(index) {
 				await editRevea(this.list[index])
 				uni.showToast({
-					icon: 'none',
+					icon: 'success',
 					title: '操作成功'
 				})
 			}

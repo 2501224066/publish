@@ -52,7 +52,7 @@
 				})
 			},
 
-			// 分享
+			// 分享到朋友圈
 			binderShare(content, url, type) {
 				uni.setClipboardData({
 					data: content,

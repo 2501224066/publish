@@ -19,11 +19,24 @@
 						<input v-if="item.varType == 'num'" type="number" placeholder="请输入"
 							placeholder-class="placeholder" v-model="item.value" />
 
-						<div v-if="item.varType == 'image'" @click="handleUploadImg(index)">
-							<image v-if="item.value" :src="item.value" class="photo" mode="aspectFill"></image>
-							<div v-else class="photo">
-								<image src="/static/upload_photo.png" mode="aspectFill"></image>
+						<div v-if="item.varType == 'image'">
+							<div class="photo" v-if="item.value">
+								<image :src="item.value" mode="aspectFill"></image>
+								<span class="del" @click="delImg(index)">X</span>
+							</div>
+							<div v-else class="photo" @click="handleUploadImg(index)">
+								<image src="/static/upload_photo.png" mode="aspectFill" class="lab"></image>
 								<text>上传二维码图片</text>
+							</div>
+						</div>
+
+						<div v-if="item.varType == 'images'" class="more-box">
+							<div class="photo more" v-for="(v, k) in item.value ? item.value.split(',') : []" :key="k">
+								<image :src="v" mode="aspectFill"></image>
+								<span class="del" @click="delImg(index, k)">X</span>
+							</div>
+							<div class="photo more" @click="handleUploadImg(index, true)">
+								<image src="/static/upload_photo.png" mode="aspectFill" class="lab"></image>
 							</div>
 						</div>
 					</div>
@@ -38,7 +51,8 @@
 		<div v-if="tempList[tempIndex].ykTheme != null" class="link">
 			<div class="link-url">
 				<div><span class="link-url-tag">推广链接</span></div>
-				<div @click="dump(tempList[tempIndex].ykTheme.themeUrl)">{{tempList[tempIndex].ykTheme.themeUrl}}</div>
+				<div @click="binderShare(tempList[tempIndex].ykTheme)">{{tempList[tempIndex].ykTheme.themeUrl}}
+				</div>
 			</div>
 			<div class="link-copy" @click="copy(tempList[tempIndex].ykTheme.themeUrl)">
 				复制
@@ -89,11 +103,30 @@
 			}
 		},
 		methods: {
+			// 分享到微信聊天
+			binderShare(obj) {
+				uni.share({
+					provider: "weixin",
+					scene: "WXSceneSession",
+					type: 0,
+					href: obj.themeUrl,
+					title: obj.title,
+					summary: obj.describe,
+					imageUrl: obj.urlImage,
+					fail: (err) => {
+						uni.showToast({
+							icon: 'error',
+							title: '分享失败'
+						})
+					}
+				});
+			},
+
 			// 登陆校验
 			loginVerify() {
 				if (!uni.getStorageSync('token')) {
 					uni.showToast({
-						icon: 'none',
+						icon: 'error',
 						title: '尚未登陆'
 					})
 					setTimeout(() => {
@@ -104,21 +137,6 @@
 					return
 				}
 				return true
-			},
-
-			// 跳转
-			dump(url) {
-				// #ifdef H5 || MP-WEIXIN  
-				window.location.href = url
-				// #endif
-
-				// #ifdef APP-PLUS　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
-				if (plus.os.name == 'Android') {
-					plus.runtime.openURL(url);
-				} else if (plus.os.name == 'iOS') {
-					plus.runtime.openURL(url);
-				}
-				// #endif
 			},
 
 			// 复制
@@ -134,6 +152,7 @@
 					shopId: uni.getStorageSync('shopInfo').id
 				})
 				this.tempList = res.data.templateList
+				console.log(res.data.templateList)
 				uni.setStorageSync('activityId', res.data.id)
 				this.isUpdate = false
 			},
@@ -144,7 +163,7 @@
 			},
 
 			// 上传图片
-			handleUploadImg(index) {
+			handleUploadImg(index, isMore = false) {
 				var that = this
 				wx.chooseImage({
 					success(res) {
@@ -158,11 +177,31 @@
 							},
 							success(res) {
 								let url = JSON.parse(res.data).data
-								that.tempList[that.tempIndex].variableList[index].value = url
+								if (isMore) {
+									if (that.tempList[that.tempIndex].variableList[index].value == null) {
+										that.tempList[that.tempIndex].variableList[index].value = url
+									} else {
+										that.tempList[that.tempIndex].variableList[index].value +=
+											`,${url}`
+									}
+								} else {
+									that.tempList[that.tempIndex].variableList[index].value = url
+								}
+
 							}
 						})
 					}
 				})
+			},
+
+			// 删除图片
+			delImg(index, k = null) {
+				if (k != null) {
+					this.tempList[this.tempIndex].variableList[index].value.splice(k, 1)
+				} else {
+					this.tempList[this.tempIndex].variableList[index].value = null
+				}
+
 			},
 
 			// 校验
@@ -174,7 +213,7 @@
 					}
 				} catch (e) {
 					uni.showToast({
-						icon: 'none',
+						icon: 'error',
 						title: e
 					})
 					return false
@@ -196,7 +235,7 @@
 					}
 					await addActivity(data)
 					uni.showToast({
-						icon: 'none',
+						icon: 'success',
 						title: '提交完成'
 					})
 				} else {
@@ -209,7 +248,7 @@
 					}
 					await addActivity(data)
 					uni.showToast({
-						icon: 'none',
+						icon: 'success',
 						title: '更新完成'
 					})
 				}
@@ -273,7 +312,8 @@
 	}
 
 	.form-item-label {
-		width: 180rpx;
+		width: 150rpx;
+		font-size: 12px;
 		height: 72rpx;
 		line-height: 72rpx;
 		padding-right: 20rpx;
@@ -293,9 +333,15 @@
 		padding: 0 30rpx;
 	}
 
+	.form-item-content .more-box {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+
 	.form-item-content .photo {
-		width: 300rpx;
-		height: 300rpx;
+		width: 250rpx;
+		height: 250rpx;
 		background: #FFFFFF;
 		border: 1rpx dashed #CCCCCC;
 		border-radius: 12rpx;
@@ -305,12 +351,43 @@
 		align-items: center;
 		flex-direction: column;
 		justify-content: center;
+		position: relative;
+
+		overflow: hidden;
+	}
+
+	.form-item-content .del {
+		content: "X";
+		position: absolute;
+		right: 0;
+		top: 0;
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		background: #999;
+		color: #fff;
+		text-align: center;
+		line-height: 20px;
+		border-radius: 0 0 0 6px;
+	}
+
+
+	.form-item-content .more {
+		width: 120rpx;
+		height: 120rpx;
+		margin: 0 20px 20px 0;
 	}
 
 	.form-item-content .photo image {
+		width: 100%;
+		height: 100%;
+		margin-bottom: 10rpx;
+	}
+
+	.form-item-content .photo .lab {
 		width: 48rpx;
 		height: 48rpx;
-		margin-bottom: 10rpx;
+
 	}
 
 	.link {

@@ -1,0 +1,93 @@
+[{
+	"id": 1,
+	"createtime": "2022-06-22 09:33:42",
+	"updatetime": "2022-06-29 15:43:15",
+	"finishTemplate": "<p>测试模板1：!value!</p><p><br></p><p><br></p><p>测试图片：!value2!</p><p><br></p><p><br></p><p><br></p>!value3!",
+	"variableList": [{
+		"id": 13,
+		"varName": "测试变量",
+		"varParameter": "!value!",
+		"varType": "string",
+		"templateId": 1,
+		"value": "测试变量"
+	}, {
+		"id": 14,
+		"varName": "测试图片",
+		"varParameter": "!value2!",
+		"varType": "image",
+		"templateId": 1,
+		"value": "https://weihuoke-app.oss-cn-beijing.aliyuncs.com/img/165674347359421c18d.jpg"
+	}, {
+		"id": 58,
+		"varName": "批量图片",
+		"varParameter": "!value3!",
+		"varType": "images",
+		"templateId": 1,
+		"value": "https://weihuoke-app.oss-cn-beijing.aliyuncs.com/img/165674347720625a550.jpg,https://weihuoke-app.oss-cn-beijing.aliyuncs.com/img/165674348203076b5eb.jpg"
+	}],
+	"isDel": 0,
+	"type": 1,
+	"finishTemplateDemo": "<p>测试模板1：测试变量</p><p><br></p><p><br></p><p>测试图片：<img  src=\"测试图片\" /></p><p><br></p><p><br></p><p><br></p>",
+	"ykTheme": {
+		"id": 6,
+		"themeUrl": "https://vhk.youkelb.com/admin/#/activityH5/ba3ca35f:6",
+		"finishTemplate": "<p>测试模板1：测试变量</p><p><br></p><p><br></p><p>测试图片：<img  src=\"https://weihuoke-app.oss-cn-beijing.aliyuncs.com/img/165674347359421c18d.jpg\" /></p><p><br></p><p><br></p><p><br></p>https://weihuoke-app.oss-cn-beijing.aliyuncs.com/img/165674347720625a550.jpg,https://weihuoke-app.oss-cn-beijing.aliyuncs.com/img/165674348203076b5eb.jpg",
+		"templateId": 1,
+		"activityId": 2,
+		"shopId": 2,
+		"startTime": "2022-06-22 09:32:29",
+		"expiredTime": "2022-06-30 09:32:32",
+		"createtime": "2022-06-29 23:27:24",
+		"updatetime": "2022-07-02 14:31:28",
+		"ykVariableList": [],
+		"ykVariableListStr": "[{\"id\":13,\"templateId\":1,\"value\":\"测试变量\",\"varName\":\"测试变量\",\"varParameter\":\"!value!\",\"varType\":\"string\"},{\"id\":14,\"templateId\":1,\"value\":\"https://weihuoke-app.oss-cn-beijing.aliyuncs.com/img/165674347359421c18d.jpg\",\"varName\":\"测试图片\",\"varParameter\":\"!value2!\",\"varType\":\"image\"},{\"id\":58,\"templateId\":1,\"value\":\"https://weihuoke-app.oss-cn-beijing.aliyuncs.com/img/165674347720625a550.jpg,https://weihuoke-app.oss-cn-beijing.aliyuncs.com/img/165674348203076b5eb.jpg\",\"varName\":\"批量图片\",\"varParameter\":\"!value3!\",\"varType\":\"images\"}]",
+		"clickNum": 0,
+		"forwardNum": 0
+	},
+	"ykLotteryUser": null,
+	"activityId": null,
+	"title": "空气炸锅",
+	"code": null
+}, {
+	"id": 2,
+	"createtime": "2022-06-22 09:33:42",
+	"updatetime": "2022-06-22 09:33:45",
+	"finishTemplate": "测试模板1：!value!",
+	"variableList": [{
+		"id": 2,
+		"varName": "测试变量",
+		"varParameter": "!value!",
+		"varType": "string",
+		"templateId": 2,
+		"value": null
+	}],
+	"isDel": 0,
+	"type": 1,
+	"finishTemplateDemo": "测试模板1：",
+	"ykTheme": null,
+	"ykLotteryUser": null,
+	"activityId": null,
+	"title": "测试模板1",
+	"code": null
+}, {
+	"id": 3,
+	"createtime": "2022-06-22 09:33:42",
+	"updatetime": "2022-06-22 09:33:45",
+	"finishTemplate": "测试模板1：!value!",
+	"variableList": [{
+		"id": 3,
+		"varName": "测试变量",
+		"varParameter": "!value!",
+		"varType": "string",
+		"templateId": 3,
+		"value": null
+	}],
+	"isDel": 0,
+	"type": 1,
+	"finishTemplateDemo": "测试模板1：",
+	"ykTheme": null,
+	"ykLotteryUser": null,
+	"activityId": null,
+	"title": "测试模板1",
+	"code": null
+}]

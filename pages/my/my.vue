@@ -63,7 +63,7 @@
 			loginVerify() {
 				if (!uni.getStorageSync('token')) {
 					uni.showToast({
-						icon: 'none',
+						icon: 'error',
 						title: '尚未登陆'
 					})
 					setTimeout(() => {
@@ -83,7 +83,7 @@
 				uni.removeStorageSync('shopInfo')
 				uni.removeStorageSync('token')
 				uni.showToast({
-					icon: 'none',
+					icon: 'success',
 					title: '操作成功'
 				})
 				setTimeout(() => {

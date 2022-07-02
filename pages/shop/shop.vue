@@ -130,7 +130,7 @@
 					if (!this.form.address) throw '请输入详细地址'
 				} catch (e) {
 					uni.showToast({
-						icon: 'none',
+						icon: 'error',
 						title: e
 					})
 					return false

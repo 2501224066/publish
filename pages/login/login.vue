@@ -66,7 +66,7 @@
 					if (!this.form.code) throw '请输入验证码'
 				} catch (e) {
 					uni.showToast({
-						icon: 'none',
+						icon: 'error',
 						title: e
 					})
 					return false
@@ -83,7 +83,7 @@
 				})
 				uni.setStorageSync('token', res.data)
 				uni.showToast({
-					icon: 'none',
+					icon: 'success',
 					title: '登陆成功'
 				})
 				await this.getUserInfo(res.data)
@@ -116,14 +116,14 @@
 			async getCode() {
 				if (!this.form.phone) {
 					uni.showToast({
-						icon: 'none',
+						icon: 'error',
 						title: '请输入手机号'
 					})
 					return
 				}
 				await sendCode(null, `?phoneNumber=${this.form.phone}&type=0`)
 				uni.showToast({
-					icon: 'none',
+					icon: 'success',
 					title: '验证码已发送'
 				})
 				this.codeWait = 60

@@ -14,43 +14,47 @@
 
 <style>
 	page {
-		font-size: 28rpx;
+		font-size: 14px;
 		font-weight: 400;
 	}
 
 	.box {
-		padding: 0 30rpx;
+		padding: 0 15px;
 	}
 
 	.flex-footer {
 		position: fixed;
 		bottom: 0;
 		/* #ifdef H5 */
-		bottom: 100rpx;
+		bottom: 50px;
 		/* #endif */
 		left: 0;
 		width: 100%;
-		height: 120rpx;
+		height: 60px;
+		background: #fff;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 
 	.flex-footer-box {
-		height: 120rpx;
+		height: 60px;
 	}
 
 	.placeholder {
-		font-size: 32rpx;
+		font-size: 16px;
 		color: #CCCCCC;
 	}
 
 	.btn {
-		height: 88rpx;
+		height: 44px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		text-align: center;
-		border: 2rpx solid #F74239;
-		border-radius: 44rpx;
-		font-size: 32rpx;
+		border: 1px solid #F74239;
+		border-radius: 22px;
+		font-size: 16px;
 		font-weight: bold;
 		box-sizing: border-box;
 	}
@@ -66,27 +70,27 @@
 	}
 
 	.right-icon {
-		width: 14rpx;
-		height: 24rpx;
+		width: 7px;
+		height: 12px;
 	}
 
 	.address-icon {
-		width: 60rpx;
-		height: 60rpx;
+		width: 30px;
+		height: 30px;
 	}
 
 	.reveal-icon {
-		width: 38rpx;
-		height: 38rpx;
+		width: 19px;
+		height: 19px;
 	}
 
 	.up-icon {
-		width: 38rpx;
-		height: 38rpx;
+		width: 19px;
+		height: 19px;
 	}
 
 	.down-icon {
-		width: 38rpx;
-		height: 38rpx;
+		width: 19px;
+		height: 19px;
 	}
 </style>
