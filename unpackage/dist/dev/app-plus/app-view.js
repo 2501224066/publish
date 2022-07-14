@@ -1640,36 +1640,64 @@ var render = function() {
       _c(
         "div",
         { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } },
-        _vm._l(_vm._$g(2, "f"), function(item, index, $20, $30) {
+        [
+          _c(
+            "div",
+            { staticClass: _vm._$g(2, "sc"), attrs: { _i: 2 } },
+            _vm._l(_vm._$g(3, "f"), function(item, index, $20, $30) {
+              return _c(
+                "div",
+                {
+                  key: item,
+                  class: _vm._$g("3-" + $30, "c"),
+                  attrs: { _i: "3-" + $30 },
+                  on: {
+                    click: function($event) {
+                      return _vm.$handleViewEvent($event)
+                    }
+                  }
+                },
+                [_vm._v(_vm._$g("3-" + $30, "t0-0"))]
+              )
+            }),
+            1
+          )
+        ],
+        1
+      ),
+      _c(
+        "div",
+        { staticClass: _vm._$g(4, "sc"), attrs: { _i: 4 } },
+        _vm._l(_vm._$g(5, "f"), function(item, index, $21, $31) {
           return _c(
             "div",
             {
               key: item,
-              staticClass: _vm._$g("2-" + $30, "sc"),
-              attrs: { _i: "2-" + $30 }
+              staticClass: _vm._$g("5-" + $31, "sc"),
+              attrs: { _i: "5-" + $31 }
             },
             [
               _c(
                 "div",
                 {
-                  staticClass: _vm._$g("3-" + $30, "sc"),
-                  attrs: { _i: "3-" + $30 }
+                  staticClass: _vm._$g("6-" + $31, "sc"),
+                  attrs: { _i: "6-" + $31 }
                 },
-                [_vm._v(_vm._$g("3-" + $30, "t0-0"))]
+                [_vm._v(_vm._$g("6-" + $31, "t0-0"))]
               ),
               _c(
                 "div",
                 {
-                  staticClass: _vm._$g("4-" + $30, "sc"),
-                  attrs: { _i: "4-" + $30 }
+                  staticClass: _vm._$g("7-" + $31, "sc"),
+                  attrs: { _i: "7-" + $31 }
                 },
-                _vm._l(_vm._$g(5 + "-" + $30, "f"), function(v, k, $21, $31) {
+                _vm._l(_vm._$g(8 + "-" + $31, "f"), function(v, k, $22, $32) {
                   return _c("v-uni-image", {
                     key: v,
-                    staticClass: _vm._$g("5-" + $30 + "-" + $31, "sc"),
+                    staticClass: _vm._$g("8-" + $31 + "-" + $32, "sc"),
                     attrs: {
-                      src: _vm._$g("5-" + $30 + "-" + $31, "a-src"),
-                      _i: "5-" + $30 + "-" + $31
+                      src: _vm._$g("8-" + $31 + "-" + $32, "a-src"),
+                      _i: "8-" + $31 + "-" + $32
                     }
                   })
                 }),
@@ -1678,37 +1706,48 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: _vm._$g("6-" + $30, "sc"),
-                  attrs: { _i: "6-" + $30 }
+                  staticClass: _vm._$g("9-" + $31, "sc"),
+                  attrs: { _i: "9-" + $31 }
                 },
                 [
                   _c(
                     "v-uni-button",
                     {
-                      staticClass: _vm._$g("7-" + $30, "sc"),
-                      staticStyle: { width: "40%" },
-                      attrs: { _i: "7-" + $30 },
+                      staticClass: _vm._$g("10-" + $31, "sc"),
+                      attrs: { _i: "10-" + $31 },
                       on: {
                         click: function($event) {
                           return _vm.$handleViewEvent($event)
                         }
                       }
                     },
-                    [_vm._v("保存")]
+                    [_vm._v("复制文本")]
                   ),
                   _c(
                     "v-uni-button",
                     {
-                      staticClass: _vm._$g("8-" + $30, "sc"),
-                      staticStyle: { width: "40%" },
-                      attrs: { _i: "8-" + $30 },
+                      staticClass: _vm._$g("11-" + $31, "sc"),
+                      attrs: { _i: "11-" + $31 },
                       on: {
                         click: function($event) {
                           return _vm.$handleViewEvent($event)
                         }
                       }
                     },
-                    [_vm._v("一键发送")]
+                    [_vm._v("下载图片")]
+                  ),
+                  _c(
+                    "v-uni-button",
+                    {
+                      staticClass: _vm._$g("12-" + $31, "sc"),
+                      attrs: { _i: "12-" + $31 },
+                      on: {
+                        click: function($event) {
+                          return _vm.$handleViewEvent($event)
+                        }
+                      }
+                    },
+                    [_vm._v("转发")]
                   )
                 ],
                 1
@@ -1863,7 +1902,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 15);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\n/**\n * 这里是uni-app内置的常用样式变量\n *\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\n *\n */\n/**\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\n *\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\n */\n/* 颜色变量 */\n/* 行为相关颜色 */\n/* 文字基本颜色 */\n/* 背景颜色 */\n/* 边框颜色 */\n/* 尺寸变量 */\n/* 文字尺寸 */\n/* 图片尺寸 */\n/* Border Radius */\n/* 水平间距 */\n/* 垂直间距 */\n/* 透明度 */\n/* 文章场景相关 */\n.card[data-v-548ac2e2] {\n  background: #FFFFFF;\n  border-radius: 24rpx;\n  margin-top: 30rpx;\n  padding: 37rpx 30rpx;\n}\n.card-text[data-v-548ac2e2] {\n  display: -webkit-box;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  margin-bottom: 17rpx;\n}\n.card-img[data-v-548ac2e2] {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n}\n.card-img > .img[data-v-548ac2e2] {\n  margin-top: 20rpx;\n  width: 200rpx;\n  height: 200rpx;\n  border-radius: 20rpx;\n}\n.card-footer[data-v-548ac2e2] {\n  display: flex;\n}\n.btn[data-v-548ac2e2] {\n  margin-top: 30rpx;\n}\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n/**\n * 这里是uni-app内置的常用样式变量\n *\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\n *\n */\n/**\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\n *\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\n */\n/* 颜色变量 */\n/* 行为相关颜色 */\n/* 文字基本颜色 */\n/* 背景颜色 */\n/* 边框颜色 */\n/* 尺寸变量 */\n/* 文字尺寸 */\n/* 图片尺寸 */\n/* Border Radius */\n/* 水平间距 */\n/* 垂直间距 */\n/* 透明度 */\n/* 文章场景相关 */\n.shadow[data-v-548ac2e2] {\n  background: #fff;\n  box-shadow: 0px 4px 10px 0px rgba(255, 135, 28, 0.1);\n}\n.tab[data-v-548ac2e2] {\n  height: 88rpx;\n  display: flex;\n  align-items: center;\n  overflow-x: auto;\n}\n.tab-item[data-v-548ac2e2] {\n  flex-shrink: 1;\n  white-space: nowrap;\n  height: 56rpx;\n  line-height: 56rpx;\n  border-radius: 28rpx;\n  padding: 0 28rpx;\n  margin-right: 30rpx;\n  background: rgba(247, 66, 57, 0.05);\n  border: 1px solid #F74239;\n  border-radius: 28px;\n  color: #F74239;\n  box-sizing: border-box;\n}\n.tab-item-s[data-v-548ac2e2] {\n  background: #F74239;\n  color: #fff;\n}\n.card[data-v-548ac2e2] {\n  background: #FFFFFF;\n  border-radius: 24rpx;\n  margin-top: 30rpx;\n  padding: 37rpx 30rpx;\n}\n.card-text[data-v-548ac2e2] {\n  display: -webkit-box;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  margin-bottom: 17rpx;\n}\n.card-img[data-v-548ac2e2] {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n}\n.card-img > .img[data-v-548ac2e2] {\n  margin-top: 20rpx;\n  width: 200rpx;\n  height: 200rpx;\n  border-radius: 20rpx;\n}\n.card-footer[data-v-548ac2e2] {\n  display: flex;\n}\n.btn[data-v-548ac2e2] {\n  width: 30% !important;\n  margin-top: 30rpx;\n}\n", ""]);
 // Exports
 module.exports = exports;
 

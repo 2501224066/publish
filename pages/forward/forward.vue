@@ -1,7 +1,15 @@
 <template>
 	<div>
+		<div class="box shadow">
+			<div class="tab">
+				<div :class="{'tab-item': true, 'tab-item-s' :tabIndex == index }" v-for="(item, index) in list"
+					:key="index" @click="tabIndex = index">{{item.name}}
+				</div>
+			</div>
+		</div>
+
 		<div class="box">
-			<div class="card" v-for="(item, index) in list" :key="index">
+			<div class="card" v-for="(item, index) in list[tabIndex].momentsList" :key="index">
 				<div class="card-text">
 					{{item.wxContent}}
 				</div>
@@ -10,9 +18,9 @@
 				</div>
 
 				<div class="card-footer">
-					<button class="btn btn1" style="width: 40%;" @click="save(item.wxImagesList)">保存</button>
-					<button class="btn btn1" style="width: 40%;"
-						@click=" binderShare(item.wxContent, item.wxImagesList[0], item.type)">一键发送</button>
+					<button class="btn btn1" @click="copyText(item.wxContent)">复制文本</button>
+					<button class="btn btn1" @click="downloadImg(item.wxImagesList)">下载图片</button>
+					<button class="btn btn1" @click="share(item)">转发</button>
 				</div>
 
 			</div>
@@ -28,6 +36,7 @@
 	export default {
 		data() {
 			return {
+				tabIndex: 0,
 				list: []
 			}
 		},
@@ -43,32 +52,50 @@
 				this.list = res.data
 			},
 
-			// 保存
-			save(imgs) {
+			// 复制文本
+			copyText(content) {
+				uni.setClipboardData({
+					data: content,
+					success: function() {
+						uni.showToast({
+							icon: 'success',
+							title: '复制完成'
+						})
+					}
+				})
+			},
+
+			// 下载图片
+			downloadImg(imgs) {
 				imgs.forEach(item => {
-					uni.saveImageToPhotosAlbum({
-						filePath: item,
-					});
+					uni.downloadFile({
+						url: item,
+						success: (res) => {
+							console.log(res.tempFilePath)
+							uni.saveImageToPhotosAlbum({
+								filePath: res.tempFilePath,
+								success: function() {
+									uni.showToast({
+										title: "保存中",
+										icon: "loading"
+									});
+								},
+							});
+						}
+					})
 				})
 			},
 
 			// 分享到朋友圈
-			binderShare(content, url, type) {
-				uni.setClipboardData({
-					data: content,
-					success: function() {
-						uni.share({
-							provider: "weixin",
-							scene: "WXSceneTimeline",
-							type: type || 2,
-							title: content,
-							summary: content,
-							imageUrl: url,
-							mediaUrl: url
-						});
-					}
-				})
-			}
+			async share(obj) {
+				uni.share({
+					provider: "weixin",
+					scene: "WXSceneTimeline",
+					type: 2,
+					title: obj.wxContent,
+					imageUrl: obj.wxImagesList[0]
+				});
+			},
 		}
 	}
 </script>
@@ -81,6 +108,38 @@
 </style>
 
 <style lang="scss" scoped>
+	.shadow {
+		background: #fff;
+		box-shadow: 0px 4px 10px 0px rgba(255, 135, 28, 0.1);
+	}
+
+	.tab {
+		height: 88rpx;
+		display: flex;
+		align-items: center;
+		overflow-x: auto;
+	}
+
+	.tab-item {
+		flex-shrink: 1;
+		white-space: nowrap;
+		height: 56rpx;
+		line-height: 56rpx;
+		border-radius: 28rpx;
+		padding: 0 28rpx;
+		margin-right: 30rpx;
+		background: rgba(247, 66, 57, 0.05);
+		border: 1px solid #F74239;
+		border-radius: 28px;
+		color: #F74239;
+		box-sizing: border-box;
+	}
+
+	.tab-item-s {
+		background: #F74239;
+		color: #fff;
+	}
+
 	.card {
 		background: #FFFFFF;
 		border-radius: 24rpx;
@@ -116,6 +175,7 @@
 	}
 
 	.btn {
+		width: 30% !important;
 		margin-top: 30rpx;
 	}
 </style>

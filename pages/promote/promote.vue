@@ -152,7 +152,6 @@
 					shopId: uni.getStorageSync('shopInfo').id
 				})
 				this.tempList = res.data.templateList
-				console.log(res.data.templateList)
 				uni.setStorageSync('activityId', res.data.id)
 				this.isUpdate = false
 			},
