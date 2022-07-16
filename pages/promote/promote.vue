@@ -50,12 +50,14 @@
 
 		<div v-if="tempList[tempIndex].ykTheme != null" class="link">
 			<div class="link-url">
-				<div><span class="link-url-tag">推广链接</span></div>
-				<div @click="binderShare(tempList[tempIndex].ykTheme)">{{tempList[tempIndex].ykTheme.themeUrl}}
+				<div class="link-url-title">{{tempList[tempIndex].ykTheme.title}}</div>
+				<div class="link-url-memo">
+					<div>{{tempList[tempIndex].ykTheme.describe}}</div>
+					<image :src="tempList[tempIndex].ykTheme.urlImage" mode="aspectFill"></image>
 				</div>
 			</div>
-			<div class="link-copy" @click="copy(tempList[tempIndex].ykTheme.themeUrl)">
-				复制
+			<div class="link-copy" @click="binderShare(tempList[tempIndex].ykTheme)">
+				分享
 			</div>
 		</div>
 
@@ -137,13 +139,6 @@
 					return
 				}
 				return true
-			},
-
-			// 复制
-			copy(url) {
-				uni.setClipboardData({
-					data: url
-				})
 			},
 
 			// 获取模版
@@ -351,7 +346,6 @@
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
-
 		overflow: hidden;
 	}
 
@@ -380,7 +374,6 @@
 	.form-item-content .photo image {
 		width: 100%;
 		height: 100%;
-		margin-bottom: 10rpx;
 	}
 
 	.form-item-content .photo .lab {
@@ -392,27 +385,35 @@
 	.link {
 		display: flex;
 		align-items: center;
-		padding: 0 30px;
+		padding: 0 20px;
 		margin: 50px 0;
 		box-sizing: border-box;
 		justify-content: space-between;
 
 		&-url {
 			width: 85%;
-			padding: 10px;
+			padding: 16px;
 			box-sizing: border-box;
 			border-radius: 10px;
-			color: #fff;
-			background: #F74239;
+			background: #fff;
 			word-break: break-all;
 
-			&-tag {
-				display: inline-block;
+			&-title {
 				background: #fff;
-				color: #F74239;
-				padding: 2px 5px;
-				border-radius: 4px;
 				margin-bottom: 6px;
+				font-size: 16px;
+			}
+
+			&-memo {
+				padding-left: 6px;
+				color: #999;
+				display: flex;
+				justify-content: space-between;
+
+				>image {
+					width: 60px;
+					height: 60px;
+				}
 			}
 		}
 

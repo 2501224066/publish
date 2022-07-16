@@ -20,7 +20,6 @@
 				<div class="card-footer">
 					<button class="btn btn1" @click="copyText(item.wxContent)">复制文本</button>
 					<button class="btn btn1" @click="downloadImg(item.wxImagesList)">下载图片</button>
-					<button class="btn btn1" @click="share(item)">转发</button>
 				</div>
 
 			</div>
@@ -84,17 +83,6 @@
 						}
 					})
 				})
-			},
-
-			// 分享到朋友圈
-			async share(obj) {
-				uni.share({
-					provider: "weixin",
-					scene: "WXSceneTimeline",
-					type: 2,
-					title: obj.wxContent,
-					imageUrl: obj.wxImagesList[0]
-				});
 			},
 		}
 	}
@@ -175,7 +163,7 @@
 	}
 
 	.btn {
-		width: 30% !important;
+		width: 40% !important;
 		margin-top: 30rpx;
 	}
 </style>
