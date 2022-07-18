@@ -42,10 +42,6 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="come">
-				<span @click="getTemp()">重置表单</span>
-			</div>
 		</div>
 
 		<div v-if="tempList[tempIndex].ykTheme != null" class="link">
@@ -65,11 +61,10 @@
 
 		<div class="flex-footer">
 			<div class="box sub">
-				<Preview :content="tempList[tempIndex].finishTemplate">
-					<div class="btn btn1">
-						预览
-					</div>
-				</Preview>
+				<div class="btn btn1" @click="getTemp()">
+					重置
+				</div>
+
 				<div v-if="tempList[tempIndex].ykTheme == null" class="btn btn2" @click="submit()">提交</div>
 				<div v-else class="btn btn2" @click="submit()">更新</div>
 			</div>
@@ -78,16 +73,12 @@
 </template>
 
 <script>
-	import Preview from "./components/preview.vue"
 	import {
 		temp,
 		addActivity
 	} from "@/request/api.js"
 
 	export default {
-		components: {
-			Preview
-		},
 		data() {
 			return {
 				tempList: [{
